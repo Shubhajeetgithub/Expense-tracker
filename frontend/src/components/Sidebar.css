@@ -1,0 +1,56 @@
+.sidebar {
+  width: 220px;
+  background: var(--card-bg);
+  padding: 1rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h2 {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  svg {
+    margin-right: 0.5rem;
+    fill: var(--accent);
+  }
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  svg {
+    margin-right: 0.5rem;
+  }
+  color: white;
+  svg {
+    fill: white;
+  }
+}
+
+.nav-link {
+  text-decoration: none;
+}
+
+.nav-link.active li, .sidebar .nav-link li:hover {
+  background: var(--accent);
+  color: var(--text-hover);
+  font-weight: bold;
+  svg {
+    fill: var(--text-hover);
+  }
+  transition: background 0.3s ease, color 0.3s ease;
+  transition: fill 0.3s ease;
+  transition: font-weight 0.3s ease;
+}

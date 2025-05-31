@@ -1,0 +1,43 @@
+.card{
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    transition: transform 0.2s ease-in-out;
+    &:hover {
+        cursor: pointer;
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+    .card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: rgb(228, 226, 226);
+        margin-bottom: 4px;
+    }
+    .card-body {
+        color: white;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        .amount {
+            font-size: 2.5rem;
+            line-height: 1;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .sidenote {
+            font-size: 0.9rem;
+            line-height: 1.1;
+            margin: 0;
+            color: #ccc;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+:root {
+  --bg: #0D1526;
+  --card-bg: #020817;
+  --text-light: #e2e8f0;
+  --text-muted: #94a3b8;
+  --accent: #3B82F6;
+  --text-hover: #020203;
+}
+body {
+  margin: 0;
+  font-family: 'Segoe UT', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-light);
+}
