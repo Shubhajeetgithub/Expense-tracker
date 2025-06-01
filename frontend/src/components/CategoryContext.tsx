@@ -12,6 +12,8 @@ interface Category {
 interface CategoryContextType {
   categories: Category[];
   addCategory: (name: string, color: string) => void;
+  deleteCategory: (id: number) => void;
+  updateCategory: (id: number, name: string, color: string) => void;
 }
 
 // Create the context with a default value (can be null initially and checked in consumer)
@@ -35,9 +37,17 @@ export const CategoryProvider: React.FC<CategoryProviderProps> = ({ children }) 
   const addCategory = (name: string, color: string) => {
     setCategories([...categories, { id: Date.now(), name, color }]);
   };
+  const deleteCategory = (id: number) => {
+    setCategories((prev: Category[]) => prev.filter((item: Category) => item.id !== id));
+  };
+  const updateCategory = (id: number, name: string, color: string) => {
+    setCategories((prev: Category[]) =>
+      prev.map((item: Category) => (item.id === id ? { ...item, name, color } : item))
+    );
+  };
 
   return (
-    <CategoryContext.Provider value={{ categories, addCategory }}>
+    <CategoryContext.Provider value={{ categories, addCategory, deleteCategory, updateCategory }}>
       {children}
     </CategoryContext.Provider>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect} from 'react';
 import './Categories.css';
 import { CategoryContext } from '../components/CategoryContext';
 import AddCategoryModal from '../components/AddCategory';
@@ -8,9 +8,31 @@ interface Category {
   name: string;
   color: string;
 }
+interface Transaction {
+  id: number;
+  name: string;
+  category: Category;
+  amount: number;
+  isDebit: boolean;
+}
 
 const Categories: React.FC = () => {
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  useEffect(() => {
+    const storedTransactions = localStorage.getItem('expenseTrackerTransactions');
+    if (storedTransactions) {
+      setTransactions(JSON.parse(storedTransactions));
+    }
+  }, []);
   const context = useContext(CategoryContext);
+  function calculateTransactionsByCategory(category: Category) {
+    return transactions
+      .filter(transaction => transaction.category.id === category.id)
+      .reduce((total, transaction) => total + (transaction.isDebit ? -transaction.amount : transaction.amount), 0);
+  }
+  function calculateTransactionCountByCategory(category: Category) {
+    return transactions.filter(transaction => transaction.category.id === category.id).length;
+  }
 
   // Handle missing provider
   if (!context) {
@@ -41,7 +63,7 @@ const Categories: React.FC = () => {
 
       <div className='categories-list'>
         {categories.map((category: Category) => (
-          <CategoryCard title= {category.name} color = {category.color} />
+          <CategoryCard key={category.id} title= {category.name} color = {category.color} id = {category.id} transaction_cnt={calculateTransactionCountByCategory(category)}/>
         ))}
       </div>
     </div>

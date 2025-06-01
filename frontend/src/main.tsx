@@ -9,13 +9,17 @@ import Transactions from './pages/Transactions.tsx'
 import Reports from './pages/Reports.tsx'
 import Categories from './pages/Categories.tsx'
 import { CategoryProvider } from './components/CategoryContext.tsx'
-
+import { TransactionProvider } from './components/TransactionContext.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route path='' element={<Dashboard />} />
-      <Route path='transactions' element={<Transactions />} />
+      <Route path='transactions' element={
+        <TransactionProvider>
+        <Transactions />
+        </TransactionProvider>
+        } />
       <Route path='reports' element={<Reports />} />
       <Route path='categories' element={
         <CategoryProvider>

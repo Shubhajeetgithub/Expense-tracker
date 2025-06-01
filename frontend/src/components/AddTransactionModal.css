@@ -1,0 +1,64 @@
+.add-Transaction-modal {
+    background-color: #111827;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 400px;
+    margin: auto;
+    font-family: 'Segoe UI', sans-serif;
+    color: #F9FAFB;
+    h3 {
+        color: #F9FAFB;
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 0.95rem;
+        color: #D1D5DB;
+    }
+    input[type="text"],
+    input[type="number"],
+    select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #1F2937;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    color: #F9FAFB;
+    font-size: 0.95rem;
+    }
+
+    input[type="text"]::placeholder {
+    color: #9CA3AF;
+    }
+
+    /* Buttons */
+    button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"] {
+    background-color: #2563EB; /* Blue */
+    color: white;
+    }
+
+    button[type="submit"]:hover {
+    background-color: #1D4ED8;
+    }
+
+    button[type="button"] {
+    background-color: #6B7280; /* Gray */
+    color: white;
+    }
+
+    button[type="button"]:hover {
+    background-color: #4B5563;
+    }
+}
