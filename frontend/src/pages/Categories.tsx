@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import './Categories.css';
 import { CategoryContext } from '../components/CategoryContext';
 import AddCategoryModal from '../components/AddCategory';
-
+import CategoryCard from '../components/CategoryCard';
 interface Category {
   id: number;
   name: string;
@@ -39,24 +39,11 @@ const Categories: React.FC = () => {
 
       {isModalOpen && <AddCategoryModal onClose={handleCloseModal} />}
 
-      <ul className='categories-list'>
+      <div className='categories-list'>
         {categories.map((category: Category) => (
-          <li
-            key={category.id}
-            style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}
-          >
-            <div
-              style={{
-                width: '20px',
-                height: '20px',
-                backgroundColor: category.color,
-                marginRight: '10px',
-              }}
-            ></div>
-            {category.name}
-          </li>
+          <CategoryCard title= {category.name} color = {category.color} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
