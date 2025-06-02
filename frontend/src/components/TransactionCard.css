@@ -25,6 +25,12 @@
                 border-radius: 20px;
                 padding: 5px;
             }
+            .recurring {
+                background-color: rgba(65, 105, 225, 0.205);
+                color:white;
+                border-radius: 20px;
+                padding: 5px;
+            }
         }
     }
     .right-box {

@@ -1,21 +1,9 @@
 import React, { useContext } from 'react'
 import "./TransactionCard.css"
 import { TransactionContext } from './TransactionContext';
+import type { Transaction, Category } from '../assets/datatypes';
 
-interface Category {
-    id: number,
-    name: string;
-    color: string;
-}
-
-interface TransactionCardProps {
-    id: number;
-    name: string;
-    category: Category;
-    amount: number;
-    isDebit: boolean;
-}
-function TransactionCard(props: TransactionCardProps) {
+function TransactionCard(props: Transaction) {
     const context = useContext(TransactionContext);
     if (!context) {
         throw new Error("CategoryCard must be used within a CategoryProvider");
@@ -42,6 +30,10 @@ function TransactionCard(props: TransactionCardProps) {
         <div className="date-category">
             <div className="date">{formattedDate}</div>
             <div className="category" style={{color: props.category.color, backgroundColor}}>{props.category.name}</div>
+            <div className="recurring"
+            style={{
+                display: props.isRecurring ? 'block' : 'none'}}>
+                Recurring</div>
         </div>
       </div>
       <div

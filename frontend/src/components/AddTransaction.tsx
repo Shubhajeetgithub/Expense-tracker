@@ -1,12 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { TransactionContext } from './TransactionContext';
 import "./AddTransactionModal.css"; 
-// Define props type
-interface Category {
-  id: number, 
-  name: string,
-  color: string
-}
+import type { Category, Transaction } from '../assets/datatypes';
+
 interface AddTransactionModalProps {
   onClose: () => void;
 }
@@ -16,6 +12,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState(0);
   const [isDebit, setIsDebit] = useState(true);
+  const [isRecurring, setIsRecurring] = useState(false);
   const context = useContext(TransactionContext);
 
   const storedCategories = JSON.parse(localStorage.getItem('expenseTrackerCategories') || '[]');
@@ -36,7 +33,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
           alert('Category not found. Please add the category first.');
           return;
         }
-        addTransaction(name, categoryObj, amount, isDebit);
+        addTransaction(name, categoryObj, amount, isDebit, isRecurring);
         onClose();
       } else {
         alert('Category cannot be empty');
@@ -74,6 +71,13 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
             <select value={isDebit ? 'debit' : 'credit'} onChange={(e) => setIsDebit(e.target.value === 'debit')}>
             <option value="debit">Debit</option>
             <option value="credit">Credit</option>
+            </select>
+        </div>
+        <div>
+            <label>Recurring:</label>
+            <select value={isRecurring ? 'yes' : 'no'} onChange={(e) => setIsRecurring(e.target.value === 'yes')}>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
             </select>
         </div>
       <button onClick={handleSave} style={{cursor: 'pointer'}}>Save</button>

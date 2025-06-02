@@ -3,21 +3,7 @@ import "./Transactions.css"
 import { TransactionContext } from '../components/TransactionContext'
 import AddTransactionModal from '../components/AddTransaction'
 import TransactionCard from '../components/TransactionCard';
-
-
-interface Category {
-    id: number;
-    name: string;
-    color: string;
-}
-
-interface Transaction {
-  id: number;
-  name: string;
-  category: Category;
-  amount: number;
-  isDebit: boolean;
-}
+import type { Transaction } from '../assets/datatypes';
 
 const Transactions : React.FC = () => {
   const context = useContext(TransactionContext);
@@ -42,7 +28,7 @@ const Transactions : React.FC = () => {
         {isModalOpen && <AddTransactionModal onClose={handleCloseModal} />}
         <div className="transactions-list">
           {transactions.map((transaction: Transaction) => (
-          <TransactionCard key={transaction.id} id={transaction.id} name={transaction.name} category={transaction.category} amount={transaction.amount} isDebit={transaction.isDebit} />
+          <TransactionCard key={transaction.id} id={transaction.id} name={transaction.name} category={transaction.category} amount={transaction.amount} isDebit={transaction.isDebit} isRecurring={transaction.isRecurring} />
         ))}
         </div>
     </div>
