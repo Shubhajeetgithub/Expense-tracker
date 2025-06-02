@@ -2,3 +2,14 @@
   display: grid;
   grid-template-columns: 1fr 5fr;
 }
+
+/* mobile layout */
+@media(max-width: 800px) {
+  .layout {
+    grid-template-columns: 1fr;
+    .outlet {
+      padding-bottom: 80px;
+    }
+  }
+
+}

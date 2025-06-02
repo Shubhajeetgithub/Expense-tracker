@@ -54,3 +54,28 @@
   transition: fill 0.3s ease;
   transition: font-weight 0.3s ease;
 }
+
+/* mobile layout */
+@media(max-width: 800px) {
+  .sidebar {
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    h2 {
+      display: none;
+    }
+    nav ul .nav-link li .text{
+      display: none;
+    }
+    ul {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+    nav ul .nav-link li svg {
+      margin-right: 0;
+    }
+  }
+}
