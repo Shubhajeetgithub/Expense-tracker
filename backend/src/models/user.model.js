@@ -22,7 +22,13 @@ const userSchema = new mongoose.Schema({
     }, 
     refreshToken: {
         type: String
-    }
+    },
+    transactionRecord: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Transaction"
+        }
+    ]
 }, {timestamps: true})
 
 userSchema.pre("save", async function (next) {

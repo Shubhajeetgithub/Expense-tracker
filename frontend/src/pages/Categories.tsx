@@ -3,18 +3,7 @@ import './Categories.css';
 import { CategoryContext } from '../components/CategoryContext';
 import AddCategoryModal from '../components/AddCategory';
 import CategoryCard from '../components/CategoryCard';
-interface Category {
-  id: number;
-  name: string;
-  color: string;
-}
-interface Transaction {
-  id: number;
-  name: string;
-  category: Category;
-  amount: number;
-  isDebit: boolean;
-}
+import type { Transaction, Category } from '../assets/datatypes';
 
 const Categories: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -31,7 +20,7 @@ const Categories: React.FC = () => {
       .reduce((total, transaction) => total + (transaction.isDebit ? -transaction.amount : transaction.amount), 0);
   }
   function calculateTransactionCountByCategory(category: Category) {
-    return transactions.filter(transaction => transaction.category.id === category.id).length;
+    return transactions.filter(transaction => transaction.category.name === category.name).length;
   }
 
   // Handle missing provider

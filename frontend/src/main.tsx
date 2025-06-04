@@ -10,11 +10,21 @@ import Reports from './pages/Reports.tsx'
 import Categories from './pages/Categories.tsx'
 import { CategoryProvider } from './components/CategoryContext.tsx'
 import { TransactionProvider } from './components/TransactionContext.tsx'
+import Welcome from './pages/Welcome.tsx'
+import Register from './pages/Register.tsx'
+import Login from './pages/Login.tsx'
+import { AuthProvider } from './AuthContext.tsx'
+import ProtectedRoute from './ProtectedRoute.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Layout />}>
-      <Route path='' element={<Dashboard />} />
+    <>
+    <Route path="/" element={<Welcome />} />
+    <Route path="/register" element={<Register />} />
+    <Route path="/login" element={<Login />} />
+    <Route element={<ProtectedRoute />}>
+    <Route path="/home" element={<Layout />}>
+      <Route path='dashboard' element={<Dashboard />} />
       <Route path='transactions' element={
         <TransactionProvider>
         <Transactions />
@@ -26,11 +36,15 @@ const router = createBrowserRouter(
         <Categories />
         </CategoryProvider>
         } />
+      </Route>
     </Route>
+    </>
   )
 )
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
+    <AuthProvider>
     <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )

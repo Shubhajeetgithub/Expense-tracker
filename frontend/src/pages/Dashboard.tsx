@@ -1,41 +1,74 @@
 import React, { useState, useEffect } from 'react'
 import "./Dashboard.css"
 import Card from './../components/Card'
+import { useNavigate } from 'react-router-dom'
+import type { Transaction, Category } from '../assets/datatypes'
 
-interface Category {
-    id: number;
-    name: string;
-    color: string;
-}
 
-interface Transaction {
-  id: number;
-  name: string;
-  category: Category;
-  amount: number;
-  isDebit: boolean;
-}
 function Dashboard() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const username = localStorage.getItem('username') || "";
+  const [greeting, setGreeting] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
+    const now = new Date();
+    const hours = now.getHours();
+    if (hours >= 5 && hours < 12) setGreeting("Good Morning");
+    else if (hours >= 12 && hours < 17) setGreeting("Good Afternoon");
+    else if (hours >= 17 && hours < 21) setGreeting("Good Evening");
+    else setGreeting("Good Night");
     const storedTransactions = localStorage.getItem('expenseTrackerTransactions');
     if (storedTransactions) {
       setTransactions(JSON.parse(storedTransactions));
     }
   }, []);
   function calculateIncome() {
-    return transactions
+    try {
+      return transactions
       .filter(transaction => !transaction.isDebit)
       .reduce((total, transaction) => total + transaction.amount, 0);
+    } catch (error) {
+      return 0;
+    }
   }
   function calculateExpenses() {
-    return transactions
+    try { 
+      return transactions
       .filter(transaction => transaction.isDebit)
       .reduce((total, transaction) => total + transaction.amount, 0);
+    } catch (error) {
+      return 0;
+    }
+  }
+
+  interface HandleLogOutEvent extends React.MouseEvent<HTMLButtonElement, MouseEvent> {}
+
+  const handleLogOut = (e: HandleLogOutEvent): void => {
+    e.preventDefault();
+    setIsLoading(true);
+    fetch('http://localhost:8000/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({fullName: localStorage.getItem('username'), email: localStorage.getItem('email'), transactions_string: localStorage.getItem('expenseTrackerTransactions')})
+    }).then((res) => {
+        if (res.ok) {
+          localStorage.clear();
+          alert('Details saved');
+          navigate('/login');
+        }
+        else alert('Something went wrong')
+    }).catch((err) => alert(err))
+    .finally(() => setIsLoading(false));
   }
   return (
     <div>
-    <header className="dashboard-header"> Dashboard </header>
+    <div className="wrapper">
+    <header className="dashboard-header"> {greeting} {username.split(" ")[0]}!! </header>
+    <button className="logout" onClick={handleLogOut} disabled={isLoading}>{isLoading ? 'Logging out...' : 'Log out'}</button>
+    </div>
       <div className="summary">
       <Card 
       title="Total Balance" 

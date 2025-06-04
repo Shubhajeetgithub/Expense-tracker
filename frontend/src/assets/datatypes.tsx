@@ -11,4 +11,5 @@ export interface Transaction {
     amount: number;
     isDebit: boolean;
     isRecurring: boolean;
+    date: string;
 }

@@ -1,8 +1,14 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .dashboard-header {
     font-size: 1.5rem;
     padding: 10px;
     text-align: left;
     margin-left: 20px;
+    margin-top: 10px;
     font-weight: bold;
 }
 .summary {
@@ -10,6 +16,21 @@
   justify-content: space-evenly;
   padding: 20px;
   gap: 20px;
+}
+.logout {
+  cursor: pointer;
+  background-color: var(--accent);
+  font-size: 1.2rem;
+  margin-right: 20px;
+  margin-top: 10px;
+  width: fit-content;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+
+  &:hover {
+    background-color: blue;
+  }
 }
 @media(max-width: 800px) {
   .summary {

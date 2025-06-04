@@ -13,6 +13,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
   const [amount, setAmount] = useState(0);
   const [isDebit, setIsDebit] = useState(true);
   const [isRecurring, setIsRecurring] = useState(false);
+  const [date, setDate] = useState(new Date().toISOString().split('T')[0]); // Default to today's date
   const context = useContext(TransactionContext);
 
   const storedCategories = JSON.parse(localStorage.getItem('expenseTrackerCategories') || '[]');
@@ -33,7 +34,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
           alert('Category not found. Please add the category first.');
           return;
         }
-        addTransaction(name, categoryObj, amount, isDebit, isRecurring);
+        addTransaction(name, categoryObj, amount, isDebit, isRecurring, date);
         onClose();
       } else {
         alert('Category cannot be empty');
@@ -47,7 +48,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
     <div className="add-Transaction-modal" style={{textAlign: 'left', marginLeft: '20px'}}>
       <h3>Add New Transaction</h3>
       <div>
-        <label>Name:</label>
+        <label>Name:*</label>
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
       </div>
       <div>
@@ -56,7 +57,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         >
-        <option value="" disabled>Select a category:</option>
+        <option value="" disabled>Select a category:*</option>
         {categories.map((option: string) => (
           <option key={option} value={option}>{option}</option>
         ))}
@@ -79,6 +80,9 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
             <option value="yes">Yes</option>
             <option value="no">No</option>
             </select>
+        </div>
+        <div>
+          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
         </div>
       <button onClick={handleSave} style={{cursor: 'pointer'}}>Save</button>
       <button onClick={onClose} style={{cursor: 'pointer'}}>Cancel</button>

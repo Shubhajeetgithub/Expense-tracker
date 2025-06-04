@@ -8,21 +8,26 @@ function TransactionCard(props: Transaction) {
     if (!context) {
         throw new Error("CategoryCard must be used within a CategoryProvider");
     }
-
+    const formattedDate = //convert 2025-06-03 to 3 June 2025
+        new Date(props.date).toLocaleDateString('en-US', {  
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
     const { deleteTransaction } = context;
-    const dateObj = new Date(props.id);
-    const formattedDate = dateObj.toLocaleDateString("en-GB", {
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-    });
     function hexToRgba(hex: string, alpha: number) {
         const r = parseInt(hex.slice(1, 3), 16);
         const g = parseInt(hex.slice(3, 5), 16);
         const b = parseInt(hex.slice(5, 7), 16);
         return `rgba(${r},${g},${b},${alpha})`;
     }
-    const backgroundColor = hexToRgba(props.category.color, 0.1);
+
+    let backgroundColor = '';
+    try {
+        backgroundColor = hexToRgba(props.category.color, 0.1);
+    } catch (error) {
+        backgroundColor = '#f0f0f0';
+    }
   return (
     <div className='transaction-card'>
       <div className="left-box">

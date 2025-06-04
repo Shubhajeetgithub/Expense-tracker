@@ -53,14 +53,12 @@ const Transactions : React.FC = () => {
     if (!filters) return transactions;
 
     return transactions.filter(transaction => {
-      const transactionDate = transaction.id;
+      const transactionDate = new Date(transaction.date);
       const startDate = new Date(filters.startDate);
       const endDate = new Date(filters.endDate);
-      const lowerBound: number = (startDate ? startDate.getTime() : 0);
-      const upperBound: number = (endDate ? endDate.getTime() + 86399999 : Date.now());
 
-      const isWithinDateRange = (!filters.startDate || transactionDate >= lowerBound) &&
-                                (!filters.endDate || transactionDate <= upperBound);
+      const isWithinDateRange = (!filters.startDate || transactionDate >= startDate) &&
+                                (!filters.endDate || transactionDate <= endDate);
 
       const isInSelectedCategories = filters.selectedCategories.length === 0 ||
                                     filters.selectedCategories.includes(transaction.category.name);
@@ -72,7 +70,8 @@ const Transactions : React.FC = () => {
       }
     });
   }
-  const filteredTransactions = filterTransactions(transactions, filters, searchName);
+  const safeTransactions = transactions || [];
+  const filteredTransactions = filterTransactions(safeTransactions, filters, searchName);
 
 
   return (
@@ -91,8 +90,9 @@ const Transactions : React.FC = () => {
         </button>
         {isTModalOpen && <AddTransactionModal onClose={handleCloseModal} />}
         <div className="transactions-list">
-          {filteredTransactions.map((transaction: Transaction) => (
-          <TransactionCard key={transaction.id} id={transaction.id} name={transaction.name} category={transaction.category} amount={transaction.amount} isDebit={transaction.isDebit} isRecurring={transaction.isRecurring} />
+          {filteredTransactions.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+          .map((transaction: Transaction) => (
+          <TransactionCard key={transaction.id} id={transaction.id} name={transaction.name} category={transaction.category} amount={transaction.amount} isDebit={transaction.isDebit} isRecurring={transaction.isRecurring} date={transaction.date} />
         ))}
         </div>
     </div>
