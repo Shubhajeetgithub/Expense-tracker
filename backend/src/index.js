@@ -33,28 +33,24 @@ dotenv.config({
 })
 
 const app = express()
-// const allowedOrigins = [
-//   'http://localhost:8000', // For local development of your frontend
-//   'https://expense-tracker-nine-eosin-10.vercel.app',
-// ];
+const corsOptions = {
+  origin: [
+    'https://expense-tracker-nine-eosin-10.vercel.app',
+    'http://localhost:5173'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
 
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-//       // Allow requests with no origin (like mobile apps or curl requests)
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-//   credentials: true,
-// };
+app.use(cors(corsOptions));
 
-// app.use(cors(corsOptions));
-app.use(cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true
-}));
+// Handle preflight requests explicitly
+app.options('*', cors(corsOptions));
+// app.use(cors({
+//     origin: process.env.CORS_ORIGIN,
+//     credentials: true
+// }));
 
 app.use(express.json({limit: "20kb"}))
 app.use(express.urlencoded({extended: true, limit: "20kb"}))
