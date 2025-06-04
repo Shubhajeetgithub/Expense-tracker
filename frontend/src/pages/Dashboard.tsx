@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import "./Dashboard.css"
 import Card from './../components/Card'
 import { useNavigate } from 'react-router-dom'
-import type { Transaction, Category } from '../assets/datatypes'
+import type { Transaction} from '../assets/datatypes'
 
 
 function Dashboard() {

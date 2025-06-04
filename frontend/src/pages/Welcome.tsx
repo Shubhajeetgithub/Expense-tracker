@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import "./Welcome.css"
 import Card from '../components/Card'
 import { NavLink } from 'react-router-dom'

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { TransactionContext } from './TransactionContext';
 import "./AddTransactionModal.css"; 
-import type { Category, Transaction } from '../assets/datatypes';
+import type { Category} from '../assets/datatypes';
 
 interface AddTransactionModalProps {
   onClose: () => void;

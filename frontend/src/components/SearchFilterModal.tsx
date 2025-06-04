@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import "./SearchFilterModal.css"; 
-import type { Category, Transaction } from '../assets/datatypes';
+import type { Category } from '../assets/datatypes';
 
 interface SearchFilterModalProps {
   onClose: () => void;

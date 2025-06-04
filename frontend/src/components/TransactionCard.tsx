@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import "./TransactionCard.css"
 import { TransactionContext } from './TransactionContext';
-import type { Transaction, Category } from '../assets/datatypes';
+import type { Transaction } from '../assets/datatypes';
 
 function TransactionCard(props: Transaction) {
     const context = useContext(TransactionContext);

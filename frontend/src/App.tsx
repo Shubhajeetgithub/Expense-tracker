@@ -1,6 +1,6 @@
 import './App.css'
-import Dashboard from './pages/Dashboard'
-import Sidebar from './components/Sidebar'
+// import Dashboard from './pages/Dashboard'
+// import Sidebar from './components/Sidebar'
 
 function App() {
 
