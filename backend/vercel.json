@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "index.js": {
-      "maxDuration": 10
-    }
-  },
   "headers": [
     {
       "source": "/(.*)",
