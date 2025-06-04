@@ -21,7 +21,7 @@ const Login: React.FC = () => {
     e.preventDefault();
     setIsLoading(true);
     const data : LoginFormData = {email, password};
-    axios.post('http://localhost:8000/login', data)
+    axios.post('https://expense-tracker-server-nine-vert.vercel.app/login', data)
     .then((result: any) => {
       alert(result.data.message);
       if (result.data.message === "Login successful") {
