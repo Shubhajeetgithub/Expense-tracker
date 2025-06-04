@@ -232,7 +232,7 @@ connectDB()
         });
 
     app.listen(process.env.PORT, () => {
-        console.log(`Server is running at: http://localhost:${process.env.PORT}`);
+        console.log(`Server is running at: https://expense-tracker-server-nine-vert.vercel.app/`);
     }) 
 
 })
