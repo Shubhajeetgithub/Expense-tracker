@@ -34,7 +34,8 @@ dotenv.config({
 
 const app = express()
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: ["https://expense-tracker-nine-eosin-10.vercel.app/"],
+    methods: ["POST", "GET"],
     credentials: true
 }))
 
