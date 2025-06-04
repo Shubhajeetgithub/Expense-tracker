@@ -14,11 +14,11 @@ const Categories: React.FC = () => {
     }
   }, []);
   const context = useContext(CategoryContext);
-  function calculateTransactionsByCategory(category: Category) {
-    return transactions
-      .filter(transaction => transaction.category.id === category.id)
-      .reduce((total, transaction) => total + (transaction.isDebit ? -transaction.amount : transaction.amount), 0);
-  }
+  // function calculateTransactionsByCategory(category: Category) {
+  //   return transactions
+  //     .filter(transaction => transaction.category.id === category.id)
+  //     .reduce((total, transaction) => total + (transaction.isDebit ? -transaction.amount : transaction.amount), 0);
+  // }
   function calculateTransactionCountByCategory(category: Category) {
     return transactions.filter(transaction => transaction.category.name === category.name).length;
   }
