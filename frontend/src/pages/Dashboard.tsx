@@ -47,7 +47,7 @@ function Dashboard() {
   const handleLogOut = (e: HandleLogOutEvent): void => {
     e.preventDefault();
     setIsLoading(true);
-    fetch('https://expense-tracker-server-nine-vert.vercel.app/logout', {
+    fetch('/api/proxy/logout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
