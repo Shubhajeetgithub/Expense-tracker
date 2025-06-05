@@ -21,7 +21,7 @@ const Login: React.FC = () => {
     e.preventDefault();
     setIsLoading(true);
     const data : LoginFormData = {email, password};
-    axios.post('/api/proxy/login', data)
+    axios.post('https://expense-tracker-server-8ord.onrender.com/login', data)
     .then((result: any) => {
       alert(result.data.message);
       if (result.data.message === "Login successful") {

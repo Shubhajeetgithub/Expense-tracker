@@ -18,7 +18,7 @@ function Register() {
     e.preventDefault();
     setIsLoading(true);
     const data: RegisterFormData = { email, fullName, password };
-    axios.post('/api/proxy/register', data)
+    axios.post('https://expense-tracker-server-8ord.onrender.com/register', data)
       .then((result: any) => {
         alert(result.data.message)
         if (result.data.message === "Success") navigate('/login');
