@@ -18,7 +18,7 @@ function Register() {
     e.preventDefault();
     setIsLoading(true);
     const data: RegisterFormData = { email, fullName, password };
-    axios.post('https://expense-tracker-server-nine-vert.vercel.app/register', data)
+    axios.post('/api/proxy/register', data)
       .then((result: any) => {
         alert(result.data.message)
         if (result.data.message === "Success") navigate('/login');
