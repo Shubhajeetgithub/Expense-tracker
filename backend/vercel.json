@@ -6,6 +6,12 @@
       "use": "@vercel/node"
     }
   ],
+  "rewrites": [
+    {
+      "source": "/api/proxy/:path*",
+      "destination": "https://expense-tracker-server-nine-vert.vercel.app/:path*"
+    }
+  ],
   "routes": [
     {
       "src": "/(.*)",
