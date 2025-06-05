@@ -244,9 +244,6 @@ connectDB()
         }
         });
 
-    app.listen(process.env.PORT, () => {
-        console.log(`Server is running at: https://expense-tracker-server-nine-vert.vercel.app/`);
-    }) 
 
 })
 .catch((err) => {
