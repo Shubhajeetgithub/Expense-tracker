@@ -59,7 +59,7 @@ app.use(cookieParser())
 
 connectDB()
 .then(() => {
-    app.post('/register', (req, res) => {
+    app.post('/api/register', (req, res) => {
         const {email, fullName, password} = req.body;
         User.findOne({email: email.trim().toLowerCase()})
         .then((user) => {
@@ -76,7 +76,7 @@ connectDB()
         }).catch((err) => res.json({message: err}));
     });
 
-    app.post('/login', async (req, res) => {
+    app.post('/api/login', async (req, res) => {
         const {email, password} = req.body;
         const user = await User.findOne({email: email.trim().toLowerCase()})
         if (!user) res.json({message: "No record found. Please register first."});
@@ -135,7 +135,7 @@ connectDB()
         }
     });
 
-    app.post('/logout', async (req, res) => {
+    app.post('/api/logout', async (req, res) => {
         try {
             const { fullName, email, transactions_string } = req.body;
             
