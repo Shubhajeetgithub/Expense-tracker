@@ -116,7 +116,7 @@ function Dashboard() {
   const handleLogOut = (e: HandleLogOutEvent): void => {
     e.preventDefault();
     setIsLoading(true);
-    fetch('http://localhost:8000/logout', {
+    fetch('https://expense-tracker-server-8ord.onrender.com/logout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
